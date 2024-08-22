@@ -3,12 +3,17 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar/Navbar'
 import style from './Add.module.css'
 import { v4 as uuid } from 'uuid'
+import { useDispatch } from 'react-redux'
+import { addUser } from '@/redux/slices/userSlices'
 
 
 
 
 
 const AddUser = () => {
+
+
+    const dispatch= useDispatch();
 
     const [userInfo,setUserInfo]= useState({
         id:"",
@@ -44,7 +49,15 @@ const AddUser = () => {
     }
 
     const handleClick=()=>{
-        console.log(userInfo);
+        dispatch(addUser(userInfo))
+        setUserInfo({
+            id:uuid(),
+            name:"",
+            email:"",
+            contact:"",
+            age:"",
+            jobRole:""
+        })
         
     }
 
